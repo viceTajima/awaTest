@@ -208,6 +208,11 @@ public class TestTest : MonoBehaviour
             }
         }
 
+        foreach (AccelerationChecker item in removes)
+        {
+            checkers.Remove(item);
+        }
+
         return r / count;
     }
 
