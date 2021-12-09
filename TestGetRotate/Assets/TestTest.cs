@@ -195,22 +195,29 @@ public class TestTest : MonoBehaviour
 
         float now = Time.time;
 
-        foreach (AccelerationChecker item in checkers)
+        if (checkers.Count > 0)
         {
-            if(now - item.time > test)
+            foreach (AccelerationChecker item in checkers)
             {
-                removes.Add(item);
-            }
-            else
-            {
-                count++;
-                r += item.acceleration;
+                if (now - item.time > test)
+                {
+                    removes.Add(item);
+                }
+                else
+                {
+                    count++;
+                    r += item.acceleration;
+                }
             }
         }
 
-        foreach (AccelerationChecker item in removes)
+        if (removes.Count > 0)
         {
-            checkers.Remove(item);
+            foreach (AccelerationChecker item in removes)
+            {
+                if (checkers.Contains(item) == false) continue;
+                checkers.Remove(item);
+            }
         }
 
         return r / count;
