@@ -173,6 +173,44 @@ public class TestTest : MonoBehaviour
 
     public Transform moveChecker;
 
+    public List<AccelerationChecker> checkers = new List<AccelerationChecker>();
+    public struct AccelerationChecker
+    {
+        public Vector3 acceleration;
+        public float time;
+
+        public AccelerationChecker(Vector3 a, float t)
+        {
+            this.acceleration = a;
+            this.time = t;
+        }
+    }
+
+    public Vector3 SmoothAcceleration(float test)
+    {
+        Vector3 r = Vector3.zero;
+
+        int count = 0;
+        List<AccelerationChecker> removes = new List<AccelerationChecker>();
+
+        float now = Time.time;
+
+        foreach (AccelerationChecker item in checkers)
+        {
+            if(now - item.time > test)
+            {
+                removes.Add(item);
+            }
+            else
+            {
+                count++;
+                r += item.acceleration;
+            }
+        }
+
+        return r / count;
+    }
+
     public void TestText3(string text)
     {
         string[] textsplit = text.Split(',');
@@ -182,7 +220,7 @@ public class TestTest : MonoBehaviour
                     float.Parse(textsplit[1]),
                     float.Parse(textsplit[2]));
 
-        moveChecker.localPosition = aaaaaa;
+        //moveChecker.localPosition = aaaaaa;
 
         Vector3 a = (
                 cameraTr.right * float.Parse(textsplit[0]) * -1.0f +
@@ -192,16 +230,19 @@ public class TestTest : MonoBehaviour
 
         float test = float.Parse(textsplit[4]);
 
-        if (a.magnitude < test) a = Vector3.zero;
+        checkers.Add(new AccelerationChecker(a, test));
+        Vector3 a2 = SmoothAcceleration(test);
 
         float dt = float.Parse(textsplit[3]);
-        Vector3 dx = (0.5f * a * dt * dt + speed * dt) * 10.0f;
-        speed = a * dt + (speed * ((a.magnitude >= test) ? 1.0f : Mathf.Max(1.0f - dt * float.Parse(textsplit[5]), 0.0f)));
+        Vector3 dx = (0.5f * a2 * dt * dt + speed * dt) * 10.0f;
+        speed = a2 * dt + (speed * ((a2.magnitude >= test) ? 1.0f : Mathf.Max(1.0f - dt * float.Parse(textsplit[5]), 0.0f)));
 
         cameraTr.position += dx;
 
         textMesh3.text = textsplit[4];
         textMesh4.text = textsplit[5];
+
+        moveChecker.localPosition = a2;
 
         //speed += (
         //        cameraTr.right * float.Parse(textsplit[0]) +
