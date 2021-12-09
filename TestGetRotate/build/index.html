@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Unity WebGL Player | TestGetRotate</title>
+    <script src="Build/UnityLoader.js"></script>
+    <script>
+      UnityLoader.instantiate("unityContainer", "Build/build.json");
+    </script>
+  </head>
+  <body>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/three.js/r126/three.min.js"></script>
+    <div id="unityContainer" style="width: 960px; height: 600px; margin: auto"></div><br>
+    <button type="button" id="request_permission">AAAAAAA</button><br>
+    <div id="area6">f</div><br>
+    <div id="area1">a</div><br>
+    <div id="area2">b</div><br>
+    <div id="area3">c</div><br>
+    <div id="area4">d</div><br>
+    <div id="area5">e</div><br>
+    <input type="text" id="g" value="0.5"><br>
+    <input type="text" id="h" value="1"><br>
+  </body>
+  <script type="text/javascript">
+      document.getElementById("request_permission").addEventListener("click", function(){
+        //let refSpaceEvent = new XRReferenceSpaceEvent("reset",  event => {
+        //    var testtttt = JSON.stringify(event);
+        //    console.log(testtttt);
+        //    document.getElementById("area6").innerText = testtttt;
+        //});
+        //if(!navigator.geolocation) {
+        //} else {
+        //  navigator.geolocation.getCurrentPosition(success222, error222);
+        //}
+        if (typeof DeviceMotionEvent.requestPermission === 'function') {
+          // Handle iOS 13+ devices.
+          DeviceMotionEvent.requestPermission()
+            .then((state) => {
+              if (state === 'granted') {
+                window.addEventListener('devicemotion', handleOrientation);
+              } else {
+                console.error('Request to access the orientation was rejected');
+              }
+            })
+            .catch(console.error);
+        } else {
+          // Handle regular non iOS 13+ devices.
+          window.addEventListener('devicemotion', handleOrientation);
+        }
+      })
+      
+      function success222(position) {
+        
+      }
+      function error222(position) {
+        
+      }
+
+  </script>
+</html>
