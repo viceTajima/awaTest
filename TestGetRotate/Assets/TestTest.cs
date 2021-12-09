@@ -220,6 +220,10 @@ public class TestTest : MonoBehaviour
             }
         }
 
+        if(count <= 0)
+        {
+            count = 1;
+        }
         return r / count;
     }
 
