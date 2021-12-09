@@ -246,7 +246,7 @@ public class TestTest : MonoBehaviour
 
         float test = float.Parse(textsplit[4]);
 
-        //checkers.Add(new AccelerationChecker(a, test));
+        checkers.Add(new AccelerationChecker(a, test));
         Vector3 a2 = SmoothAcceleration(test);
 
         float dt = float.Parse(textsplit[3]);
