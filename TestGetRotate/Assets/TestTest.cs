@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Runtime.InteropServices;
+using UnityEngine.UI;
 
 public class TestTest : MonoBehaviour
 {
@@ -9,6 +10,10 @@ public class TestTest : MonoBehaviour
     public TextMesh textMesh2;
     public TextMesh textMesh3;
     public TextMesh textMesh4;
+
+    public Text text1;
+    public Text text2;
+    public Text text3;
 
     [DllImport("__Internal")]
     private static extern void WatchDeviceorientation();
@@ -173,6 +178,8 @@ public class TestTest : MonoBehaviour
 
     public Transform moveChecker;
 
+    public List<Vector3> testCheck = new List<Vector3>();
+
     public void TestText3(string text)
     {
         string[] textsplit = text.Split(',');
@@ -190,13 +197,26 @@ public class TestTest : MonoBehaviour
                 cameraTr.up * float.Parse(textsplit[2]) * -1.0f
             );
 
+        testCheck.Add(a);
+        Vector3 sum = Vector3.zero;
+        foreach (Vector3 vector3 in testCheck)
+        {
+            sum += vector3;
+        }
+        Vector3 hei = sum / testCheck.Count;
+        text3.text = hei.x.ToString("f4") + " , " + hei.y.ToString("f4") + " , " + hei.z.ToString("f4");
+
         float test = float.Parse(textsplit[4]);
 
-        if (a.magnitude < test) a = Vector3.zero;
+        //if (a.magnitude < test) a = Vector3.zero;
 
         float dt = float.Parse(textsplit[3]);
-        Vector3 dx = (0.5f * a * dt * dt + speed * dt) * 10.0f;
-        speed = a * dt + (speed * ((a.magnitude >= test) ? 1.0f : Mathf.Max(1.0f - dt * float.Parse(textsplit[5]), 0.0f)));
+        Vector3 dx = (0.5f * a * dt * dt + speed * dt) * 1.0f;
+        //speed = a * dt + (speed * ((a.magnitude >= test) ? 1.0f : Mathf.Max(1.0f - dt * float.Parse(textsplit[5]), 0.0f)));
+        speed = a * dt + speed;
+
+        text1.text = speed.x.ToString("f4") + " , " + speed.y.ToString("f4") + " , " + speed.z.ToString("f4");
+        text2.text = a.x.ToString("f4") + " , " + a.y.ToString("f4") + " , " + a.z.ToString("f4");
 
         cameraTr.position += dx;
 

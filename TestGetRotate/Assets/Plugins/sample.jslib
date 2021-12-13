@@ -64,6 +64,14 @@ mergeInto(LibraryManager.library, {
         var acceleration = event.acceleration;
         var accelerationIncludingGravity = event.accelerationIncludingGravity;
         var rotationRate = event.rotationRate;
+
+        document.getElementById("area1").innerText = acceleration.x;
+        document.getElementById("area2").innerText = acceleration.y;
+        document.getElementById("area3").innerText = acceleration.z;
+        
+        document.getElementById("area4").innerText = accelerationIncludingGravity.x;
+        document.getElementById("area5").innerText = accelerationIncludingGravity.y;
+        document.getElementById("area6").innerText = accelerationIncludingGravity.z;
         
         SendMessage('TestTest', 'TestText3', acceleration.x.toString() + "," + acceleration.y.toString() + "," + acceleration.z.toString() + "," + event.interval.toString() + "," + document.getElementById("g").value + "," + document.getElementById("h").value);
       }
@@ -117,12 +125,6 @@ mergeInto(LibraryManager.library, {
                 altitudeAccuracy = position.coords.altitudeAccuracy.toString();
             }
         }
-
-        document.getElementById("area1").innerText = latitude;
-        document.getElementById("area2").innerText = longitude;
-        document.getElementById("area3").innerText = altitude;
-        document.getElementById("area4").innerText = accuracy;
-        document.getElementById("area5").innerText = altitudeAccuracy;
 
         SendMessage('TestTest', 'TestText4', latitude + "," + longitude + "," + altitude + "," + accuracy + "," + altitudeAccuracy);
     }
