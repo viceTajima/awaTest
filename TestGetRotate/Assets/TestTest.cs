@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Runtime.InteropServices;
@@ -14,6 +15,7 @@ public class TestTest : MonoBehaviour
     public Text text1;
     public Text text2;
     public Text text3;
+    public Text text4;
 
     [DllImport("__Internal")]
     private static extern void WatchDeviceorientation();
@@ -35,8 +37,12 @@ public class TestTest : MonoBehaviour
     private float getGeolocationInterval = 1.0f;
     private float getGeolocationTimer = 0.0f;
     private bool isGetGeolocation = false;
+
+    public float testFPS = 0;
+
     private void Update()
     {
+        testFPS = 1.0f / Time.deltaTime;
         //if(isGetGeolocation == true)
         //{
         //    getGeolocationTimer = getGeolocationInterval;
@@ -192,9 +198,9 @@ public class TestTest : MonoBehaviour
         moveChecker.localPosition = aaaaaa;
 
         Vector3 a = (
-                cameraTr.right * float.Parse(textsplit[0]) * -1.0f +
-                cameraTr.forward * float.Parse(textsplit[1]) * -1.0f +
-                cameraTr.up * float.Parse(textsplit[2]) * -1.0f
+                cameraTr.right * (float)Math.Truncate(double.Parse(textsplit[0]) * 10) * 0.1f * -1.0f +
+                cameraTr.forward * (float)Math.Truncate(double.Parse(textsplit[1]) * 10) * 0.1f * -1.0f +
+                cameraTr.up * (float)Math.Truncate(double.Parse(textsplit[2]) * 10) * 0.1f * -1.0f
             );
 
         testCheck.Add(a);
@@ -204,19 +210,20 @@ public class TestTest : MonoBehaviour
             sum += vector3;
         }
         Vector3 hei = sum / testCheck.Count;
-        text3.text = hei.x.ToString("f4") + " , " + hei.y.ToString("f4") + " , " + hei.z.ToString("f4");
+        text3.text = hei.x.ToString("f5") + " , " + hei.y.ToString("f5") + " , " + hei.z.ToString("f5") + " , " + hei.magnitude.ToString("f5");
 
         float test = float.Parse(textsplit[4]);
 
         //if (a.magnitude < test) a = Vector3.zero;
 
-        float dt = float.Parse(textsplit[3]);
+        float dt = float.Parse(textsplit[3]) / float.Parse(textsplit[6]);
+        text4.text = dt.ToString() + " : " + testFPS.ToString();
         Vector3 dx = (0.5f * a * dt * dt + speed * dt) * 1.0f;
         //speed = a * dt + (speed * ((a.magnitude >= test) ? 1.0f : Mathf.Max(1.0f - dt * float.Parse(textsplit[5]), 0.0f)));
         speed = a * dt + speed;
 
-        text1.text = speed.x.ToString("f4") + " , " + speed.y.ToString("f4") + " , " + speed.z.ToString("f4");
-        text2.text = a.x.ToString("f4") + " , " + a.y.ToString("f4") + " , " + a.z.ToString("f4");
+        text1.text = speed.x.ToString("f5") + " , " + speed.y.ToString("f5") + " , " + speed.z.ToString("f5") + " , " + speed.magnitude.ToString("f5");
+        text2.text = a.x.ToString("f5") + " , " + a.y.ToString("f5") + " , " + a.z.ToString("f5") + " , " + a.magnitude.ToString("f5");
 
         cameraTr.position += dx;
 

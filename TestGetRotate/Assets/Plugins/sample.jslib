@@ -65,6 +65,12 @@ mergeInto(LibraryManager.library, {
         var accelerationIncludingGravity = event.accelerationIncludingGravity;
         var rotationRate = event.rotationRate;
 
+        var teteteR = 1;
+        const ua = navigator.userAgent
+        if (/android/i.test(ua)) {
+          teteteR = 1000;
+        }
+
         document.getElementById("area1").innerText = acceleration.x;
         document.getElementById("area2").innerText = acceleration.y;
         document.getElementById("area3").innerText = acceleration.z;
@@ -73,7 +79,7 @@ mergeInto(LibraryManager.library, {
         document.getElementById("area5").innerText = accelerationIncludingGravity.y;
         document.getElementById("area6").innerText = accelerationIncludingGravity.z;
         
-        SendMessage('TestTest', 'TestText3', acceleration.x.toString() + "," + acceleration.y.toString() + "," + acceleration.z.toString() + "," + event.interval.toString() + "," + document.getElementById("g").value + "," + document.getElementById("h").value);
+        SendMessage('TestTest', 'TestText3', acceleration.x.toString() + "," + acceleration.y.toString() + "," + acceleration.z.toString() + "," + event.interval.toString() + "," + document.getElementById("g").value + "," + document.getElementById("h").value + "," + teteteR.toString());
       }
   },
 
