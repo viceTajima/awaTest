@@ -154,11 +154,15 @@ public class TestTest : MonoBehaviour
     public Transform cameraParent2;
     public Transform cameraParent3;
 
+    private Quaternion teteteRotate = Quaternion.identity;
+
     public void TestText2(string text)
     {
         string[] rotations = text.Split(',');
 
-        cameraTr.rotation = Quaternion.Inverse(new Quaternion(float.Parse(rotations[0]), float.Parse(rotations[1]), float.Parse(rotations[2]), float.Parse(rotations[3])));
+        teteteRotate = Quaternion.Inverse(new Quaternion(float.Parse(rotations[0]), float.Parse(rotations[1]), float.Parse(rotations[2]), float.Parse(rotations[3])));
+
+        cameraTr.rotation = teteteRotate;
 
         //Quaternion rotateX = Quaternion.AngleAxis(float.Parse(rotations[1]), Vector3.left);
         //Quaternion rotateY = Quaternion.AngleAxis(float.Parse(rotations[2]), Vector3.down);
@@ -261,5 +265,46 @@ public class TestTest : MonoBehaviour
         isGetGeolocation = false;
 
         textMesh1.text = System.DateTime.Now.ToString();
+    }
+
+    public void TestText5(string text)
+    {
+        string[] textsplit = text.Split(',');
+
+        float r = (textsplit[4] == "1000") ? 1.0f : -1.0f;
+
+        Vector3 a = new Vector3(
+                    float.Parse(textsplit[0]) * r,
+                    float.Parse(textsplit[2]) * r,
+                    float.Parse(textsplit[1]) * r);
+
+        testCheck.Add(a);
+        Vector3 sum = Vector3.zero;
+        foreach (Vector3 vector3 in testCheck)
+        {
+            sum += vector3;
+        }
+        Vector3 hei = sum / testCheck.Count;
+        text3.text = hei.x.ToString("f5") + " , " + hei.y.ToString("f5") + " , " + hei.z.ToString("f5") + " , " + hei.magnitude.ToString("f5");
+
+        moveChecker.localPosition = a;
+
+        float dt = float.Parse(textsplit[3]) / float.Parse(textsplit[4]);
+        text4.text = dt.ToString() + " : " + testFPS.ToString();
+        Vector3 dx = (0.5f * a * dt * dt + speed * dt) * 5.0f;
+        //speed = a * dt + (speed * ((a.magnitude >= test) ? 1.0f : Mathf.Max(1.0f - dt * float.Parse(textsplit[5]), 0.0f)));
+        speed = a * dt + speed;
+
+        text1.text = speed.x.ToString("f5") + " , " + speed.y.ToString("f5") + " , " + speed.z.ToString("f5") + " , " + speed.magnitude.ToString("f5");
+        //text2.text = a.x.ToString("f5") + " , " + a.y.ToString("f5") + " , " + a.z.ToString("f5") + " , " + a.magnitude.ToString("f5");
+        text2.text = teteteRotate.x.ToString("f5") + "," + teteteRotate.y.ToString("f5") + "," + teteteRotate.z.ToString("f5") + "," + teteteRotate.w.ToString("f5");
+
+        cameraTr.position += dx;
+    }
+
+
+    public void ChecksReset()
+    {
+        testCheck = new List<Vector3>();
     }
 }

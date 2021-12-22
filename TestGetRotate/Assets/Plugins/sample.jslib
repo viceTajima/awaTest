@@ -51,6 +51,13 @@ mergeInto(LibraryManager.library, {
         _euler.set(beta, alpha, -gamma, "ZXY");
         _qt.setFromEuler(_euler);
         
+
+        document.getElementById("qtx").innerText = _qt.x;
+        document.getElementById("qty").innerText = _qt.y;
+        document.getElementById("qtz").innerText = _qt.z;
+        document.getElementById("qtw").innerText = _qt.w;
+
+
         SendMessage('TestTest', 'TestText2', _qt.x.toString() + "," + _qt.y.toString() + "," + _qt.z.toString() + "," + _qt.w.toString());
         // Do stuff...
       }
@@ -71,15 +78,45 @@ mergeInto(LibraryManager.library, {
           teteteR = 1000;
         }
 
-        document.getElementById("area1").innerText = acceleration.x;
-        document.getElementById("area2").innerText = acceleration.y;
-        document.getElementById("area3").innerText = acceleration.z;
         
-        document.getElementById("area4").innerText = accelerationIncludingGravity.x;
-        document.getElementById("area5").innerText = accelerationIncludingGravity.y;
-        document.getElementById("area6").innerText = accelerationIncludingGravity.z;
+        var testx = parseFloat(document.getElementById("qtx").innerText);
+        var testy = parseFloat(document.getElementById("qty").innerText);
+        var testz = parseFloat(document.getElementById("qtz").innerText);
+        var testw = parseFloat(document.getElementById("qtw").innerText);
+
+        var mux = testx * 2;
+        var muy = testy * 2;
+        var muz = testz * 2;
+        var muxx = testx * mux;
+        var muyy = testy * muy;
+        var muzz = testz * muz;
+        var muxy = testx * muy;
+        var muxz = testx * muz;
+        var muyz = testy * muz;
+        var muwx = testw * mux;
+        var muwy = testw * muy;
+        var muwz = testw * muz;
+
+        var rex = (1 - (muyy + muzz)) * acceleration.x + (muxy - muwz) * acceleration.y + (muxz + muwy) * acceleration.z;
+        var rey = (muxy + muwz) * acceleration.x + (1 - (muxx + muzz)) * acceleration.y + (muyz - muwx) * acceleration.z;
+        var rez = (muxz - muwy) * acceleration.x + (muyz + muwx) * acceleration.y + (1 - (muxx + muyy)) * acceleration.z;
+
         
-        SendMessage('TestTest', 'TestText3', acceleration.x.toString() + "," + acceleration.y.toString() + "," + acceleration.z.toString() + "," + event.interval.toString() + "," + document.getElementById("g").value + "," + document.getElementById("h").value + "," + teteteR.toString());
+        document.getElementById("qttx").innerText = rex.toString();
+        document.getElementById("qtty").innerText = rey.toString();
+        document.getElementById("qttz").innerText = rez.toString();
+
+        SendMessage('TestTest', 'TestText5', rex.toString() + "," + rey.toString() + "," + rez.toString() + "," + event.interval.toString() + "," + teteteR.toString()); 
+
+        //document.getElementById("area1").innerText = acceleration.x;
+        //document.getElementById("area2").innerText = acceleration.y;
+        //document.getElementById("area3").innerText = acceleration.z;
+        //
+        //document.getElementById("area4").innerText = accelerationIncludingGravity.x;
+        //document.getElementById("area5").innerText = accelerationIncludingGravity.y;
+        //document.getElementById("area6").innerText = accelerationIncludingGravity.z;
+        //
+        //SendMessage('TestTest', 'TestText3', acceleration.x.toString() + "," + acceleration.y.toString() + "," + acceleration.z.toString() + "," + event.interval.toString() + "," + document.getElementById("g").value + "," + document.getElementById("h").value + "," + teteteR.toString());
       }
   },
 
