@@ -291,7 +291,8 @@ public class TestTest : MonoBehaviour
 
         float dt = float.Parse(textsplit[3]) / float.Parse(textsplit[4]);
         text4.text = dt.ToString() + " : " + testFPS.ToString();
-        Vector3 dx = (0.5f * a * dt * dt + speed * dt) * 5.0f;
+        //Vector3 dx = (0.5f * a * dt * dt + speed * dt) * 5.0f;
+        Vector3 dx = (0.5f * a * dt * dt) * 50.0f;
         //speed = a * dt + (speed * ((a.magnitude >= test) ? 1.0f : Mathf.Max(1.0f - dt * float.Parse(textsplit[5]), 0.0f)));
         speed = a * dt + speed;
 
