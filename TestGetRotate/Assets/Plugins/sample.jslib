@@ -106,7 +106,7 @@ mergeInto(LibraryManager.library, {
         document.getElementById("qtty").innerText = rey.toString();
         document.getElementById("qttz").innerText = rez.toString();
 
-        SendMessage('TestTest', 'TestText5', rex.toString() + "," + rey.toString() + "," + rez.toString() + "," + event.interval.toString() + "," + teteteR.toString()); 
+        SendMessage('TestTest', 'TestText5', rex.toString() + "," + rey.toString() + "," + rez.toString() + "," + event.interval.toString() + "," + teteteR.toString() +  "," + document.getElementById("g").value); 
 
         //document.getElementById("area1").innerText = acceleration.x;
         //document.getElementById("area2").innerText = acceleration.y;

@@ -2354,6 +2354,7 @@ MonoBehaviour:
   cameraParent3: {fileID: 980043822}
   moveChecker: {fileID: 158600857}
   testCheck: []
+  testCircle: {fileID: 409822715}
 --- !u!4 &714658940
 Transform:
   m_ObjectHideFlags: 0

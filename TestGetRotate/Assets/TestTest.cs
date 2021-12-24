@@ -190,6 +190,8 @@ public class TestTest : MonoBehaviour
 
     public List<Vector3> testCheck = new List<Vector3>();
 
+    public Transform testCircle;
+
     public void TestText3(string text)
     {
         string[] textsplit = text.Split(',');
@@ -217,6 +219,7 @@ public class TestTest : MonoBehaviour
         text3.text = hei.x.ToString("f5") + " , " + hei.y.ToString("f5") + " , " + hei.z.ToString("f5") + " , " + hei.magnitude.ToString("f5");
 
         float test = float.Parse(textsplit[4]);
+        testCircle.localScale = Vector3.one * test;
 
         //if (a.magnitude < test) a = Vector3.zero;
 
@@ -289,9 +292,11 @@ public class TestTest : MonoBehaviour
 
         moveChecker.localPosition = a;
 
+        testCircle.localScale = Vector3.one * float.Parse(textsplit[5]);
+
         float dt = float.Parse(textsplit[3]) / float.Parse(textsplit[4]);
         text4.text = dt.ToString() + " : " + testFPS.ToString();
-        Vector3 dx = (0.5f * a * dt * dt + speed * dt) * 5.0f;
+        Vector3 dx = (speed * dt);
         //speed = a * dt + (speed * ((a.magnitude >= test) ? 1.0f : Mathf.Max(1.0f - dt * float.Parse(textsplit[5]), 0.0f)));
         speed = a * dt + speed;
 
