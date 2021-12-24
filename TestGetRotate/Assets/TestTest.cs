@@ -217,6 +217,7 @@ public class TestTest : MonoBehaviour
         text3.text = hei.x.ToString("f5") + " , " + hei.y.ToString("f5") + " , " + hei.z.ToString("f5") + " , " + hei.magnitude.ToString("f5");
 
         float test = float.Parse(textsplit[4]);
+        testCircle.localScale = Vector3.one * test;
 
         //if (a.magnitude < test) a = Vector3.zero;
 
@@ -267,6 +268,10 @@ public class TestTest : MonoBehaviour
         textMesh1.text = System.DateTime.Now.ToString();
     }
 
+    public AccelerationController ac;
+
+    public Transform testCircle;
+
     public void TestText5(string text)
     {
         string[] textsplit = text.Split(',');
@@ -300,7 +305,8 @@ public class TestTest : MonoBehaviour
         //text2.text = a.x.ToString("f5") + " , " + a.y.ToString("f5") + " , " + a.z.ToString("f5") + " , " + a.magnitude.ToString("f5");
         text2.text = teteteRotate.x.ToString("f5") + "," + teteteRotate.y.ToString("f5") + "," + teteteRotate.z.ToString("f5") + "," + teteteRotate.w.ToString("f5");
 
-        cameraTr.position += dx;
+        //cameraTr.position += dx;
+        ac.AccelerationUpdate(a, dt);
     }
 
 

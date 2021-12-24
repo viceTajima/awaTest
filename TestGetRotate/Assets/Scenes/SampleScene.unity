@@ -2320,6 +2320,7 @@ GameObject:
   m_Component:
   - component: {fileID: 714658940}
   - component: {fileID: 714658939}
+  - component: {fileID: 714658941}
   m_Layer: 0
   m_Name: TestTest
   m_TagString: Untagged
@@ -2354,6 +2355,8 @@ MonoBehaviour:
   cameraParent3: {fileID: 980043822}
   moveChecker: {fileID: 158600857}
   testCheck: []
+  ac: {fileID: 714658941}
+  testCircle: {fileID: 409822715}
 --- !u!4 &714658940
 Transform:
   m_ObjectHideFlags: 0
@@ -2368,6 +2371,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &714658941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 714658938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 535fdc31325ac3f40b1e8d0ccdf17fd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraTransform: {fileID: 251153137}
 --- !u!1 &759935637
 GameObject:
   m_ObjectHideFlags: 0
