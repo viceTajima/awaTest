@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Test/TestTest.unity
+    guid: 3f51cfd59a61664419d373e9574cf0a5
+  - enabled: 1
     path: Assets/OpenCVForUnity/Examples/Examples/Advanced/AlphaBlendingExample/AlphaBlendingExample.unity
     guid: caa7411245a5de04f9933825040daea2
   - enabled: 1
