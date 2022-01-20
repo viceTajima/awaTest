@@ -64,6 +64,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\DetectionChecker.cs" />
     <Compile Include="Assets\JsTest.cs" />
     <Compile Include="Assets\LocationManager.cs" />
     <Compile Include="Assets\TestTest.cs" />
@@ -619,7 +620,16 @@
       <HintPath>C:/GS/git/awaTest/TestGetRotate/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup></ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="EnoxSoftware.OpenCVForUnity.Editor.csproj">
+      <Project>{0D6EEF02-C573-FF03-6D35-F2895A5C9464}</Project>
+      <Name>EnoxSoftware.OpenCVForUnity.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="EnoxSoftware.OpenCVForUnity.csproj">
+      <Project>{0F9BE314-1279-E5E7-0B89-149934D4FDB4}</Project>
+      <Name>EnoxSoftware.OpenCVForUnity</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
