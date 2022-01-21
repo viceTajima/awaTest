@@ -18,13 +18,25 @@ public class DetectionChecker : MonoBehaviour
     [SerializeField] private Slider slider;
     [SerializeField] private GameObject checkFlag;
 
+    int deviceIdx = 0;
+
+    private bool isMove = false;
+    public bool IsMove { get { return isMove; } }
+
     // Start is called before the first frame update
     void Start()
     {
-        //obtain cameras avialable
-        WebCamDevice[] cam_devices = WebCamTexture.devices;
-        //create camera texture
-        webcamTexture = new WebCamTexture(cam_devices[0].name, 480, 640, 30);
+        SetWebCamTexture();
+        //start coroutine
+        StartCoroutine(motionDetection());
+    }
+
+    public void SetWebCamTexture()
+    {
+        WebCamDevice[] devices = WebCamTexture.devices;
+        deviceIdx++;
+        if (devices.Length >= deviceIdx) deviceIdx = 0;
+        webcamTexture = new WebCamTexture(devices[deviceIdx].name, 480, 640, 30);
         //set raw image texture to obtain feed from camera texture
         cameraView.texture = webcamTexture;
         cameraView.material.mainTexture = webcamTexture;
@@ -104,7 +116,8 @@ public class DetectionChecker : MonoBehaviour
             }
             bulb.color = new Color32(value, 0, 0, value);
             slider.value = valueF;
-            checkFlag.SetActive(valueF >= 1.0f);
+            isMove = valueF >= 1.0f;
+            checkFlag.SetActive(isMove);
         }
     }
 }

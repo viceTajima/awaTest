@@ -2571,6 +2571,7 @@ MonoBehaviour:
   cameraParent3: {fileID: 980043822}
   moveChecker: {fileID: 158600857}
   testCheck: []
+  detectionChecker: {fileID: 2104477796}
 --- !u!4 &714658940
 Transform:
   m_ObjectHideFlags: 0
@@ -4633,8 +4634,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 714658939}
-        m_MethodName: ChecksReset
+      - m_Target: {fileID: 2104477796}
+        m_MethodName: SetWebCamTexture
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

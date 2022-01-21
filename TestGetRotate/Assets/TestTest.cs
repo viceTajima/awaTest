@@ -267,6 +267,8 @@ public class TestTest : MonoBehaviour
         textMesh1.text = System.DateTime.Now.ToString();
     }
 
+    [SerializeField] private DetectionChecker detectionChecker;
+
     public void TestText5(string text)
     {
         string[] textsplit = text.Split(',');
@@ -293,7 +295,7 @@ public class TestTest : MonoBehaviour
         text4.text = dt.ToString() + " : " + testFPS.ToString();
         Vector3 dx = (0.5f * a * dt * dt + speed * dt) * 5.0f;
         //speed = a * dt + (speed * ((a.magnitude >= test) ? 1.0f : Mathf.Max(1.0f - dt * float.Parse(textsplit[5]), 0.0f)));
-        speed = a * dt + speed;
+        speed = a * dt + (speed * ((detectionChecker.IsMove == true) ? 1.0f : Mathf.Max(0.0f, 1.0f - dt * 10.0f)));
 
         text1.text = speed.x.ToString("f5") + " , " + speed.y.ToString("f5") + " , " + speed.z.ToString("f5") + " , " + speed.magnitude.ToString("f5");
         //text2.text = a.x.ToString("f5") + " , " + a.y.ToString("f5") + " , " + a.z.ToString("f5") + " , " + a.magnitude.ToString("f5");
